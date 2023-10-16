@@ -26,6 +26,7 @@ import one.digitalinnovation.gof.service.ClienteService;
 public class ClienteRestController {
 
 	@Autowired
+	// É um singleton
 	private ClienteService clienteService;
 
 	@GetMapping

@@ -42,6 +42,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Cliente buscarPorId(Long id) {
 		// Buscar Cliente por ID.
+		// Retorna em Optional pq pode ou não existir
 		Optional<Cliente> cliente = clienteRepository.findById(id);
 		return cliente.get();
 	}
@@ -69,6 +70,8 @@ public class ClienteServiceImpl implements ClienteService {
 	private void salvarClienteComCep(Cliente cliente) {
 		// Verificar se o Endereco do Cliente já existe (pelo CEP).
 		String cep = cliente.getEndereco().getCep();
+		// O optional vem com algumas funcionalidades
+		// orElseGet vai criar um callback pra quando não existir
 		Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
 			// Caso não exista, integrar com o ViaCEP e persistir o retorno.
 			Endereco novoEndereco = viaCepService.consultarCep(cep);
